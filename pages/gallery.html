@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Yi Pune Gallery - Moments and memories from our events, initiatives, and community activities.">
+  <meta name="keywords" content="Gallery, Events, Community, Young Indians, Yi Pune">
+  
+  <title>Gallery - Yi Pune</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    .gallery-section {
+      padding: var(--space-12) 0;
+      background: #fff;
+    }
+
+    .gallery-header {
+      text-align: center;
+      margin-bottom: var(--space-12);
+    }
+
+    .gallery-header h1 {
+      font-size: var(--text-4xl);
+      color: var(--color-black);
+      margin-bottom: var(--space-4);
+      font-weight: 700;
+    }
+
+    .gallery-header p {
+      font-size: var(--text-lg);
+      color: var(--color-grey-dark);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .gallery-filters {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-3);
+      margin-bottom: var(--space-8);
+      flex-wrap: wrap;
+    }
+
+    .gallery-filter-btn {
+      padding: var(--space-2) var(--space-4);
+      border: 2px solid var(--color-grey-light);
+      background: transparent;
+      color: var(--color-black);
+      border-radius: var(--radius-base);
+      cursor: pointer;
+      font-weight: 500;
+      transition: all var(--transition-base);
+    }
+
+    .gallery-filter-btn:hover,
+    .gallery-filter-btn.active {
+      border-color: var(--color-primary);
+      background: var(--color-primary);
+      color: var(--color-white);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: var(--space-6);
+      margin-bottom: var(--space-12);
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+      background: var(--color-grey-light);
+      aspect-ratio: 1;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: transform var(--transition-base), box-shadow var(--transition-base);
+    }
+
+    .gallery-item:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .gallery-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity var(--transition-base);
+    }
+
+    .gallery-item:hover .gallery-overlay {
+      opacity: 1;
+    }
+
+    .gallery-overlay-content {
+      text-align: center;
+      color: var(--color-white);
+    }
+
+    .gallery-overlay-icon {
+      font-size: 48px;
+      margin-bottom: var(--space-3);
+    }
+
+    .gallery-overlay-text {
+      font-weight: 600;
+      font-size: var(--text-lg);
+    }
+
+    .gallery-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-4);
+    }
+
+    .gallery-modal.active {
+      display: flex;
+    }
+
+    .gallery-modal-content {
+      position: relative;
+      max-width: 80vw;
+      max-height: 80vh;
+    }
+
+    .gallery-modal-close {
+      background: var(--color-primary);
+      border: 2px solid var(--color-black);
+      color: var(--color-black);
+      font-size: 30px;
+      font-weight: bold;
+      cursor: pointer;
+      width: 50px;
+      height: 50px;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: all 0.2s ease;
+    }
+
+    .gallery-modal-close:hover {
+      transform: scale(1.1);
+      background: #fff;
+    }
+
+    .gallery-modal-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.2);
+      color: var(--color-white);
+      border: none;
+      padding: var(--space-4);
+      font-size: 24px;
+      cursor: pointer;
+      border-radius: var(--radius-base);
+      transition: background var(--transition-base);
+    }
+
+    .gallery-modal-nav:hover {
+      background: rgba(255, 255, 255, 0.4);
+    }
+
+    .gallery-modal-prev {
+      left: -80px;
+    }
+
+    .gallery-modal-next {
+      right: -80px;
+    }
+
+    @media (max-width: 1024px) {
+      .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: var(--space-4);
+      }
+
+      .gallery-modal-prev {
+        left: var(--space-2);
+      }
+
+      .gallery-modal-next {
+        right: var(--space-2);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: var(--space-3);
+      }
+
+      .gallery-header h1 {
+        font-size: var(--text-2xl);
+      }
+
+      .gallery-filters {
+        gap: var(--space-2);
+      }
+
+      .gallery-filter-btn {
+        padding: var(--space-2) var(--space-3);
+        font-size: var(--text-sm);
+      }
+
+      .gallery-modal-close {
+        top: -30px;
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation - Loaded from components/navbar.html -->
+  <div id="navbar-container"></div>
+
+  <!-- Main Content -->
+  <main class="page-content">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-content scroll-animate">
+        <h1 class="hero-title">Our Gallery</h1>
+        <p class="hero-subtitle">
+          Moments and memories from our events, initiatives, and community activities
+        </p>
+      </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+      <div class="container">
+        <!-- Gallery Header -->
+        <div class="gallery-header scroll-animate">
+          <h1>Explore Our Stories</h1>
+          <p>Discover the moments that define our community and impact</p>
+        </div>
+
+        <!-- Gallery Filters -->
+        <div class="gallery-filters scroll-animate">
+          <button class="gallery-filter-btn active" data-filter="all">All</button>
+          <button class="gallery-filter-btn" data-filter="events">Events</button>
+          <button class="gallery-filter-btn" data-filter="initiatives">Initiatives</button>
+          <button class="gallery-filter-btn" data-filter="community">Community</button>
+          <button class="gallery-filter-btn" data-filter="leadership">Leadership</button>
+        </div>
+
+        <!-- Gallery Grid -->
+        <div class="gallery-grid scroll-animate">
+          <!-- Event Images -->
+          <div class="gallery-item" data-category="events">
+            <img src="../assets/images/Image1.jpg" alt="Event 1" loading="lazy">
+            <div class="gallery-overlay">
+              <div class="gallery-overlay-content">
+                <div class="gallery-overlay-icon"><i class="fas fa-expand"></i></div>
+                <div class="gallery-overlay-text">View</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="initiatives">
+            <img src="../assets/images/Image2.jpg" alt="Initiative 1" loading="lazy">
+            <div class="gallery-overlay">
+              <div class="gallery-overlay-content">
+                <div class="gallery-overlay-icon"><i class="fas fa-expand"></i></div>
+                <div class="gallery-overlay-text">View</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="community">
+            <img src="../assets/images/Image3.jpg" alt="Community 1" loading="lazy">
+            <div class="gallery-overlay">
+              <div class="gallery-overlay-content">
+                <div class="gallery-overlay-icon"><i class="fas fa-expand"></i></div>
+                <div class="gallery-overlay-text">View</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="events">
+            <img src="../assets/images/Image4.jpg" alt="Event 2" loading="lazy">
+            <div class="gallery-overlay">
+              <div class="gallery-overlay-content">
+                <div class="gallery-overlay-icon"><i class="fas fa-expand"></i></div>
+                <div class="gallery-overlay-text">View</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="leadership">
+            <img src="../assets/images/Image5.jpg" alt="Leadership 1" loading="lazy">
+            <div class="gallery-overlay">
+              <div class="gallery-overlay-content">
+                <div class="gallery-overlay-icon"><i class="fas fa-expand"></i></div>
+                <div class="gallery-overlay-text">View</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="initiatives">
+            <img src="../assets/images/Image6.jpg" alt="Initiative 2" loading="lazy">
+            <div class="gallery-overlay">
+              <div class="gallery-overlay-content">
+                <div class="gallery-overlay-icon"><i class="fas fa-expand"></i></div>
+                <div class="gallery-overlay-text">View</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="community">
+            <img src="../assets/images/Image7.jpg" alt="Community 2" loading="lazy">
+            <div class="gallery-overlay">
+              <div class="gallery-overlay-content">
+                <div class="gallery-overlay-icon"><i class="fas fa-expand"></i></div>
+                <div class="gallery-overlay-text">View</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="events">
+            <img src="../assets/images/Image8.jpg" alt="Event 3" loading="lazy">
+            <div class="gallery-overlay">
+              <div class="gallery-overlay-content">
+                <div class="gallery-overlay-icon"><i class="fas fa-expand"></i></div>
+                <div class="gallery-overlay-text">View</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="leadership">
+            <img src="../assets/images/Image9.jpg" alt="Leadership 2" loading="lazy">
+            <div class="gallery-overlay">
+              <div class="gallery-overlay-content">
+                <div class="gallery-overlay-icon"><i class="fas fa-expand"></i></div>
+                <div class="gallery-overlay-text">View</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="initiatives">
+            <img src="../assets/images/Image10.jpg" alt="Initiative 3" loading="lazy">
+            <div class="gallery-overlay">
+              <div class="gallery-overlay-content">
+                <div class="gallery-overlay-icon"><i class="fas fa-expand"></i></div>
+                <div class="gallery-overlay-text">View</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="community">
+            <img src="../assets/images/Image11.jpg" alt="Community 3" loading="lazy">
+            <div class="gallery-overlay">
+              <div class="gallery-overlay-content">
+                <div class="gallery-overlay-icon"><i class="fas fa-expand"></i></div>
+                <div class="gallery-overlay-text">View</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="events">
+            <img src="../assets/images/Image12.jpg" alt="Event 4" loading="lazy">
+            <div class="gallery-overlay">
+              <div class="gallery-overlay-content">
+                <div class="gallery-overlay-icon"><i class="fas fa-expand"></i></div>
+                <div class="gallery-overlay-text">View</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer - Loaded from components/footer.html -->
+  <div id="footer-container"></div>
+
+  <!-- Scripts -->
+  <script src="../js/main.js"></script>
+  <script>
+    // Gallery Filter Functionality
+    const filterBtns = document.querySelectorAll('.gallery-filter-btn');
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    const galleryModal = document.createElement('div');
+    galleryModal.className = 'gallery-modal';
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Remove active class from all buttons
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const filter = btn.getAttribute('data-filter');
+
+        galleryItems.forEach(item => {
+          if (filter === 'all' || item.getAttribute('data-category') === filter) {
+            item.style.display = 'block';
+            setTimeout(() => {
+              item.style.opacity = '1';
+            }, 10);
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Modal Functionality
+    document.body.appendChild(galleryModal);
+
+    galleryItems.forEach((item, index) => {
+      item.addEventListener('click', () => {
+        openModal(index);
+      });
+    });
+
+    function openModal(index) {
+      const visibleItems = Array.from(galleryItems).filter(item => item.style.display !== 'none');
+      const currentItem = visibleItems[index];
+      if (!currentItem) return;
+
+      const img = currentItem.querySelector('img');
+      const alt = img.alt;
+
+      galleryModal.innerHTML = `
+        <div style="position: fixed; top: 20px; right: 20px; z-index: 2000;">
+          <button class="gallery-modal-close" style="position: static;">×</button>
+        </div>
+        <div class="gallery-modal-content">
+          <img src="${img.src}" alt="${alt}" class="gallery-modal-img">
+          <button class="gallery-modal-nav gallery-modal-prev" onclick="prevImage()"><i class="fas fa-chevron-left"></i></button>
+          <button class="gallery-modal-nav gallery-modal-next" onclick="nextImage()"><i class="fas fa-chevron-right"></i></button>
+        </div>
+      `;
+
+      galleryModal.classList.add('active');
+      currentModalIndex = index;
+
+      // Add close button handler
+      const closeBtn = galleryModal.querySelector('.gallery-modal-close');
+      if (closeBtn) {
+        closeBtn.onclick = () => {
+          galleryModal.classList.remove('active');
+        };
+      }
+    }
+
+    function closeModal() {
+      galleryModal.classList.remove('active');
+    }
+
+    let currentModalIndex = 0;
+
+    function prevImage() {
+      const visibleItems = Array.from(galleryItems).filter(item => item.style.display !== 'none');
+      currentModalIndex = (currentModalIndex - 1 + visibleItems.length) % visibleItems.length;
+      openModal(currentModalIndex);
+    }
+
+    function nextImage() {
+      const visibleItems = Array.from(galleryItems).filter(item => item.style.display !== 'none');
+      currentModalIndex = (currentModalIndex + 1) % visibleItems.length;
+      openModal(currentModalIndex);
+    }
+
+    // Add close button click handler
+    setTimeout(() => {
+      const closeBtn = document.querySelector('.gallery-modal-close');
+      if (closeBtn) {
+        closeBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          galleryModal.classList.remove('active');
+        });
+      }
+    }, 100);
+
+    // Close modal on background click
+    galleryModal.addEventListener('click', (e) => {
+      if (e.target === galleryModal) {
+        closeModal();
+      }
+    });
+
+    // Close modal on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeModal();
+      }
+      if (e.key === 'ArrowLeft') {
+        prevImage();
+      }
+      if (e.key === 'ArrowRight') {
+        nextImage();
+      }
+    });
+  </script>
+</body>
+</html>

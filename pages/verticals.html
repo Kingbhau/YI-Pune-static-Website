@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Yi Pune Verticals & Initiatives - Our eight key areas driving social impact and nation building.">
+  <meta name="keywords" content="Verticals, Initiatives, Rural, Health, Innovation, Leadership, Youth, Membership, Social Impact">
+  
+  <title>Verticals & Initiatives - Yi Pune</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    /* Page Content */
+    .page-content {
+      background: transparent !important;
+      height: auto !important;
+      max-height: auto !important;
+    }
+
+    /* Verticals Wrapper */
+    .verticals-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-8);
+      margin-bottom: 0;
+    }
+
+    /* Vertical Section - Full Width Horizontal */
+    .vertical-section {
+      display: flex;
+      flex-direction: row;
+      gap: 0;
+      background: transparent !important;
+      border-radius: 0;
+      box-shadow: none;
+      border-bottom: none;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      position: relative;
+      min-height: 400px;
+      padding: var(--space-8);
+    }
+
+    .vertical-section:nth-child(odd) {
+      background: #ffffff !important;
+    }
+
+    .vertical-section:nth-child(even) {
+      background: #f5f5f5 !important;
+    }
+
+    /* Content Section */
+    .vertical-content {
+      padding: var(--space-8);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: transparent;
+      flex: 1;
+    }
+
+    .section-header {
+      margin-bottom: var(--space-6);
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .section-icon {
+      font-size: 48px;
+      color: var(--color-primary);
+      margin-bottom: var(--space-3);
+      display: inline-block;
+    }
+
+    .section-title {
+      font-size: var(--text-2xl);
+      font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: var(--space-2);
+    }
+
+    .section-subtitle {
+      font-size: var(--text-sm);
+      color: var(--color-grey-600);
+      line-height: 1.6;
+      margin-bottom: var(--space-6);
+    }
+
+    /* Gallery Section */
+    .vertical-gallery {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-4);
+      height: 100%;
+      min-height: 400px;
+      overflow: hidden;
+      flex: 1;
+      padding: var(--space-6);
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .gallery-item::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0);
+      transition: background 0.3s ease;
+      z-index: 1;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.08);
+    }
+
+    .gallery-item:hover::after {
+      background: rgba(0, 0, 0, 0.08);
+    }
+
+    /* Objective Box */
+    .objective-box {
+      background: transparent;
+      border-left: 4px solid var(--color-primary);
+      padding: var(--space-5) 0 var(--space-5) var(--space-5);
+      border-radius: 0;
+      margin-bottom: var(--space-6);
+    }
+
+    .objective-box h4 {
+      font-size: var(--text-xs);
+      font-weight: 700;
+      color: var(--color-primary);
+      text-transform: uppercase;
+      margin-bottom: var(--space-2);
+      letter-spacing: 0.5px;
+    }
+
+    .objective-box p {
+      font-size: var(--text-sm);
+      color: var(--color-grey-700);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* Programs Section */
+    .programs-section {
+      margin-top: auto;
+    }
+
+    .programs-section h5 {
+      font-size: var(--text-xs);
+      font-weight: 700;
+      color: var(--color-black);
+      text-transform: uppercase;
+      margin-bottom: var(--space-3);
+      letter-spacing: 0.5px;
+    }
+
+    .programs-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+    }
+
+    .program-badge {
+      display: inline-block;
+      background: transparent;
+      color: var(--color-primary);
+      padding: var(--space-2) var(--space-4);
+      border: 2px solid var(--color-primary);
+      border-radius: 20px;
+      font-size: var(--text-xs);
+      font-weight: 600;
+      white-space: nowrap;
+      box-shadow: none;
+      transition: all 0.2s ease;
+    }
+
+    .program-badge:hover {
+      background: var(--color-primary);
+      color: var(--color-white);
+      transform: translateY(-2px);
+    }
+
+    /* Alternate direction for even sections */
+    .vertical-section:nth-child(odd) {
+      flex-direction: row;
+    }
+
+    .vertical-section:nth-child(odd) .vertical-gallery {
+      order: 1;
+    }
+
+    .vertical-section:nth-child(odd) .vertical-content {
+      order: 2;
+    }
+
+    .vertical-section:nth-child(even) {
+      flex-direction: row;
+    }
+
+    .vertical-section:nth-child(even) .vertical-gallery {
+      order: 2;
+    }
+
+    .vertical-section:nth-child(even) .vertical-content {
+      order: 1;
+    }
+
+    .vertical-section:hover {
+      box-shadow: none;
+      transform: none;
+    }
+
+    @media (max-width: 1200px) {
+      .vertical-section {
+        min-height: 350px;
+      }
+
+      .vertical-gallery {
+        min-height: 350px;
+      }
+
+      .section-icon {
+        font-size: 40px;
+      }
+
+      .section-title {
+        font-size: var(--text-xl);
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .vertical-section {
+        flex-direction: column;
+        min-height: auto;
+      }
+
+      .vertical-section:nth-child(odd) {
+        flex-direction: column;
+      }
+
+      .vertical-section:nth-child(even) {
+        flex-direction: column;
+      }
+
+      .vertical-gallery {
+        min-height: 300px;
+        order: 2 !important;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-4);
+      }
+
+      .vertical-content {
+        order: 1 !important;
+      }
+
+      .vertical-section:nth-child(odd) .vertical-gallery {
+        order: 2 !important;
+      }
+
+      .vertical-section:nth-child(odd) .vertical-content {
+        order: 1 !important;
+      }
+
+      .vertical-section:nth-child(even) .vertical-gallery {
+        order: 2 !important;
+      }
+
+      .vertical-section:nth-child(even) .vertical-content {
+        order: 1 !important;
+      }
+
+      .section-title {
+        font-size: var(--text-lg);
+      }
+
+      .section-icon {
+        font-size: 36px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .vertical-section {
+        flex-direction: column;
+        min-height: auto;
+      }
+
+      .vertical-section:nth-child(odd) {
+        flex-direction: column;
+      }
+
+      .vertical-section:nth-child(even) {
+        flex-direction: column;
+      }
+
+      .vertical-content {
+        order: 1 !important;
+        padding: var(--space-5);
+      }
+
+      .vertical-gallery {
+        order: 2 !important;
+        min-height: 250px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-3);
+      }
+
+      .vertical-section:nth-child(odd) .vertical-gallery {
+        order: 2 !important;
+      }
+
+      .vertical-section:nth-child(odd) .vertical-content {
+        order: 1 !important;
+      }
+
+      .vertical-section:nth-child(even) .vertical-gallery {
+        order: 2 !important;
+      }
+
+      .vertical-section:nth-child(even) .vertical-content {
+        order: 1 !important;
+      }
+
+      .section-title {
+        font-size: var(--text-lg);
+      }
+
+      .section-icon {
+        font-size: 36px;
+      }
+
+      .objective-box {
+        margin-bottom: var(--space-4);
+        padding: var(--space-4) 0 var(--space-4) var(--space-4);
+      }
+
+      .programs-list {
+        gap: var(--space-2);
+      }
+
+      .program-badge {
+        padding: var(--space-1) var(--space-3);
+        font-size: 10px;
+      }
+    }
+
+    /* Small mobile devices */
+    @media (max-width: 480px) {
+      .vertical-section {
+        min-height: auto;
+        padding: var(--space-4);
+      }
+
+      .vertical-content {
+        order: 1 !important;
+        padding: var(--space-4);
+      }
+
+      .vertical-gallery {
+        order: 2 !important;
+        display: grid;
+        grid-template-columns: 1fr;
+        min-height: 200px;
+        padding: var(--space-3);
+        gap: var(--space-2);
+      }
+
+      .section-icon {
+        font-size: 28px;
+      }
+
+      .section-title {
+        font-size: var(--text-base);
+      }
+
+      .section-subtitle {
+        font-size: 11px;
+      }
+
+      .objective-box {
+        padding: var(--space-3);
+        margin-bottom: var(--space-3);
+      }
+
+      .programs-list {
+        gap: var(--space-1);
+      }
+
+      .program-badge {
+        padding: 4px 8px;
+        font-size: 9px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation - Loaded from components/navbar.html -->
+  <div id="navbar-container"></div>
+
+  <!-- Main Content -->
+  <main class="page-content">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-content scroll-animate">
+        <h1 class="hero-title">Our Verticals & Initiatives</h1>
+        <p class="hero-subtitle">
+          Eight key areas driving social impact, innovation, and nation building
+        </p>
+      </div>
+    </section>
+
+    <!-- Verticals Section -->
+    <section class="section">
+      <div class="container">
+        <div class="verticals-wrapper">
+          <!-- 1. Rural Initiatives -->
+          <div class="vertical-section scroll-animate">
+            <div class="vertical-content">
+              <div class="section-header">
+                <div class="section-icon"><i class="fas fa-tree"></i></div>
+                <h3 class="section-title">Rural Initiatives</h3>
+                <p class="section-subtitle">Sustainable development & community empowerment</p>
+              </div>
+
+              <div class="objective-box">
+                <h4><i class="fas fa-bullseye"></i> Objective</h4>
+                <p>Create sustainable impact in rural areas through targeted interventions in education, healthcare, livelihoods, and infrastructure development.</p>
+              </div>
+
+              <div class="programs-section">
+                <h5>Key Programs</h5>
+                <div class="programs-list">
+                  <span class="program-badge">Masoom</span>
+                  <span class="program-badge">Road Safety</span>
+                  <span class="program-badge">Yuva Rural</span>
+                  <span class="program-badge">Livelihoods</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="vertical-gallery">
+              <div class="gallery-item">
+                <img src="../assets/images/Image1.jpg" alt="Rural 1">
+              </div>
+              <div class="gallery-item">
+                <img src="../assets/images/Image2.jpg" alt="Rural 2">
+              </div>
+              <div class="gallery-item">
+                <img src="../assets/images/Image11.jpg" alt="Rural 3">
+              </div>
+              <div class="gallery-item">
+                <img src="../assets/images/Image12.jpg" alt="Rural 4">
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. Health & Environment -->
+          <div class="vertical-section scroll-animate">
+            <div class="vertical-content">
+              <div class="section-header">
+                <div class="section-icon"><i class="fas fa-leaf"></i></div>
+                <h3 class="section-title">Health & Environment</h3>
+                <p class="section-subtitle">Healthcare access & environmental conservation</p>
+              </div>
+
+              <div class="objective-box">
+                <h4><i class="fas fa-bullseye"></i> Objective</h4>
+                <p>Create awareness and drive action on health, environment, and sustainability issues through campaigns and conservation efforts.</p>
+              </div>
+
+              <div class="programs-section">
+                <h5>Key Programs</h5>
+                <div class="programs-list">
+                  <span class="program-badge">Health Drives</span>
+                  <span class="program-badge">Green Initiatives</span>
+                  <span class="program-badge">Climate Action</span>
+                  <span class="program-badge">Water Resources</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="vertical-gallery">
+              <div class="gallery-item">
+                <img src="../assets/images/Image3.jpg" alt="Health 1">
+              </div>
+              <div class="gallery-item">
+                <img src="../assets/images/Image4.jpg" alt="Health 2">
+              </div>
+              <div class="gallery-item">
+                <img src="../assets/images/Image5.jpg" alt="Health 3">
+              </div>
+              <div class="gallery-item">
+                <img src="../assets/images/Image6.jpg" alt="Health 4">
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. Innovation & Entrepreneurship -->
+          <div class="vertical-section scroll-animate">
+            <div class="vertical-content">
+              <div class="section-header">
+                <div class="section-icon"><i class="fas fa-lightbulb"></i></div>
+                <h3 class="section-title">Innovation & Entrepreneurship</h3>
+                <p class="section-subtitle">Fostering startup culture and innovation mindset</p>
+              </div>
+
+              <div class="objective-box">
+                <h4><i class="fas fa-bullseye"></i> Objective</h4>
+                <p>Nurture innovation and entrepreneurial mindset among young Indians through startup incubation and mentorship programs.</p>
+              </div>
+
+              <div class="programs-section">
+                <h5>Key Programs</h5>
+                <div class="programs-list">
+                  <span class="program-badge">Startup Support</span>
+                  <span class="program-badge">Innovation Labs</span>
+                  <span class="program-badge">Workshops</span>
+                  <span class="program-badge">Networking</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="vertical-gallery">
+              <div class="gallery-item">
+                <img src="../assets/images/Image7.jpg" alt="Innovation 1">
+              </div>
+              <div class="gallery-item">
+                <img src="../assets/images/Image8.jpg" alt="Innovation 2">
+              </div>
+              <div class="gallery-item">
+                <img src="../assets/images/Image9.jpg" alt="Innovation 3">
+              </div>
+              <div class="gallery-item">
+                <img src="../assets/images/Image10.jpg" alt="Innovation 4">
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. Leadership Development -->
+          <div class="vertical-section scroll-animate">
+            <div class="vertical-content">
+              <div class="section-header">
+                <div class="section-icon"><i class="fas fa-users"></i></div>
+                <h3 class="section-title">Leadership Development</h3>
+                <p class="section-subtitle">Building transformational young leaders</p>
+              </div>
+
+              <div class="objective-box">
+                <h4><i class="fas fa-bullseye"></i> Objective</h4>
+                <p>Develop leadership capabilities among young Indians through mentorship, training, and experiential learning programs.</p>
+              </div>
+
+              <div class="programs-section">
+                <h5>Key Programs</h5>
+                <div class="programs-list">
+                  <span class="program-badge">Yi Yuva</span>
+                  <span class="program-badge">Learning Missions</span>
+                  <span class="program-badge">Summits</span>
+                  <span class="program-badge">Mentorship</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="vertical-gallery">
+              <div class="gallery-item">
+                <img src="../assets/images/Image11.jpg" alt="Leadership 1">
+              </div>
+              <div class="gallery-item">
+                <img src="../assets/images/Image12.jpg" alt="Leadership 2">
+              </div>
+              <div class="gallery-item">
+                <img src="../assets/images/Image1.jpg" alt="Leadership 3">
+              </div>
+              <div class="gallery-item">
+                <img src="../assets/images/Image2.jpg" alt="Leadership 4">
+              </div>
+            </div>
+          </div>
+
+          <!-- 5. Nation Building & Civic Engagement -->
+          <div class="vertical-section scroll-animate">
+            <div class="vertical-content">
+              <div class="section-header">
+                <div class="section-icon"><i class="fas fa-building"></i></div>
+                <h3 class="section-title">Nation Building</h3>
+                <p class="section-subtitle">Civic engagement and community development</p>
+              </div>
+
+              <div class="objective-box">
+                <h4><i class="fas fa-bullseye"></i> Objective</h4>
+                <p>Contribute to nation building through accessibility, safety, child protection, and civic engagement initiatives.</p>
+              </div>
+
+              <div class="programs-section">
+                <h5>Key Programs</h5>
+                <div class="programs-list">
+                  <span class="program-badge">Accessibility</span>
+                  <span class="program-badge">Road Safety</span>
+                  <span class="program-badge">Child Safety</span>
+                  <span class="program-badge">Civic Engagement</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="vertical-gallery">
+              <div class="gallery-item">
+                <img src="../assets/images/Image3.jpg" alt="Nation 1">
+              </div>
+              <div class="gallery-item">
+                <img src="../assets/images/Image4.jpg" alt="Nation 2">
+              </div>
+              <div class="gallery-item">
+                <img src="../assets/images/Image5.jpg" alt="Nation 3">
+              </div>
+              <div class="gallery-item">
+                <img src="../assets/images/Image6.jpg" alt="Nation 4">
+              </div>
+            </div>
+          </div>
+
+          <!-- 6. Youth Affairs & Skilling -->
+          <div class="vertical-section scroll-animate">
+            <div class="vertical-content">
+              <div class="section-header">
+                <div class="section-icon"><i class="fas fa-graduation-cap"></i></div>
+                <h3 class="section-title">Youth Affairs & Skilling</h3>
+                <p class="section-subtitle">Skill development for modern economy</p>
+              </div>
+
+              <div class="objective-box">
+                <h4><i class="fas fa-bullseye"></i> Objective</h4>
+                <p>Equip youth with relevant skills for the modern economy through vocational training and digital literacy programs.</p>
+              </div>
+
+              <div class="programs-section">
+                <h5>Key Programs</h5>
+                <div class="programs-list">
+                  <span class="program-badge">Tech Skills</span>
+                  <span class="program-badge">Career Services</span>
+                  <span class="program-badge">Vocational Training</span>
+                  <span class="program-badge">Soft Skills</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="vertical-gallery">
+              <div class="gallery-item">
+                <img src="../assets/images/Image7.jpg" alt="Youth 1">
+              </div>
+              <div class="gallery-item">
+                <img src="../assets/images/Image8.jpg" alt="Youth 2">
+              </div>
+              <div class="gallery-item">
+                <img src="../assets/images/Image9.jpg" alt="Youth 3">
+              </div>
+              <div class="gallery-item">
+                <img src="../assets/images/Image10.jpg" alt="Youth 4">
+              </div>
+            </div>
+          </div>
+
+          <!-- 7. Membership Engagement & Learning -->
+          <div class="vertical-section scroll-animate">
+            <div class="vertical-content">
+              <div class="section-header">
+                <div class="section-icon"><i class="fas fa-handshake"></i></div>
+                <h3 class="section-title">Membership Engagement</h3>
+                <p class="section-subtitle">Community building and knowledge sharing</p>
+              </div>
+
+              <div class="objective-box">
+                <h4><i class="fas fa-bullseye"></i> Objective</h4>
+                <p>Build an engaged membership community through learning sessions, knowledge networks, and collaborative initiatives.</p>
+              </div>
+
+              <div class="programs-section">
+                <h5>Key Programs</h5>
+                <div class="programs-list">
+                  <span class="program-badge">Learning Circles</span>
+                  <span class="program-badge">Webinars</span>
+                  <span class="program-badge">Networking Events</span>
+                  <span class="program-badge">Knowledge Base</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="vertical-gallery">
+              <div class="gallery-item">
+                <img src="../assets/images/Image11.jpg" alt="Membership 1">
+              </div>
+              <div class="gallery-item">
+                <img src="../assets/images/Image12.jpg" alt="Membership 2">
+              </div>
+              <div class="gallery-item">
+                <img src="../assets/images/Image1.jpg" alt="Membership 3">
+              </div>
+              <div class="gallery-item">
+                <img src="../assets/images/Image2.jpg" alt="Membership 4">
+              </div>
+            </div>
+          </div>
+
+          <!-- 8. Social Impact Projects -->
+          <div class="vertical-section scroll-animate">
+            <div class="vertical-content">
+              <div class="section-header">
+                <div class="section-icon"><i class="fas fa-heart"></i></div>
+                <h3 class="section-title">Social Impact Projects</h3>
+                <p class="section-subtitle">Strategic transformative initiatives</p>
+              </div>
+
+              <div class="objective-box">
+                <h4><i class="fas fa-bullseye"></i> Objective</h4>
+                <p>Execute transformative social impact projects that create systemic change across multiple sectors and communities.</p>
+              </div>
+
+              <div class="programs-section">
+                <h5>Flagship Projects</h5>
+                <div class="programs-list">
+                  <span class="program-badge">Community Hub</span>
+                  <span class="program-badge">Digital Inclusion</span>
+                  <span class="program-badge">Health & Wellness</span>
+                  <span class="program-badge">Future Leaders</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="vertical-gallery">
+              <div class="gallery-item">
+                <img src="../assets/images/Image3.jpg" alt="Impact 1">
+              </div>
+              <div class="gallery-item">
+                <img src="../assets/images/Image4.jpg" alt="Impact 2">
+              </div>
+              <div class="gallery-item">
+                <img src="../assets/images/Image5.jpg" alt="Impact 3">
+              </div>
+              <div class="gallery-item">
+                <img src="../assets/images/Image6.jpg" alt="Impact 4">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+   <!-- Footer - Loaded dynamically -->
+  <div id="footer-container"></div>
+ 
+
+  <!-- Scripts -->
+  <script src="../js/main.js"></script>
+</body>
+</html>

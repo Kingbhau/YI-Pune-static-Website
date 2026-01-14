@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Upcoming events by Yi Pune Chapter - Join our learning sessions, networking events, workshops, and social impact initiatives.">
+  <meta name="keywords" content="Yi Pune upcoming events, workshops, networking, learning sessions, conferences">
+  <title>Upcoming Events - Yi Pune Chapter</title>
+  <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <!-- Data File -->
+  <script src="../js/data.js"></script>
+</head>
+<body>
+  <!-- Navigation - Loaded from components/navbar.html -->
+  <div id="navbar-container"></div>
+
+  <main class="page-content">
+    <!-- Page Header -->
+    <section class="hero" style="min-height: 400px;">
+      <div class="hero-content scroll-animate">
+        <h1 class="hero-title">Upcoming Events</h1>
+        <p class="hero-subtitle">
+          Don't miss these exciting programs and initiatives happening soon. Join our dynamic community for learning, networking, and social impact.
+        </p>
+      </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="section bg-grey">
+      <div class="container">
+        <div class="section-heading scroll-animate">
+          <h2 class="section-title">Featured Events</h2>
+          <p class="section-subtitle">
+            Exciting opportunities to connect, learn, and make an impact
+          </p>
+        </div>
+
+        <!-- Events Grid -->
+        <div class="grid grid-cols-3 scroll-animate" id="eventsContainer">
+          <!-- Events will be generated here by JavaScript -->
+        </div>
+
+        <!-- Pagination -->
+        <div style="display: flex; justify-content: center; gap: var(--space-2); margin-top: var(--space-12);" id="paginationContainer">
+          <button id="prevBtn" style="
+            padding: var(--space-3) var(--space-4);
+            border: 2px solid var(--color-grey-300);
+            border-radius: var(--radius-base);
+            background: var(--color-white);
+            cursor: pointer;
+            transition: all var(--transition-base);
+          ">← Previous</button>
+          <!-- Page buttons will be generated here -->
+          <button id="nextBtn" style="
+            padding: var(--space-3) var(--space-4);
+            border: 2px solid var(--color-grey-300);
+            border-radius: var(--radius-base);
+            background: var(--color-white);
+            cursor: pointer;
+            transition: all var(--transition-base);
+          ">Next →</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <div id="footer-container"></div>
+
+  <script src="../js/main.js"></script>
+  <script>
+    // Wait for DOM to be fully loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      // Pagination and Events functionality
+      let currentPage = 1;
+      const eventsPerPage = 6;
+      let totalPages = 1;
+
+      // Render events from data file
+      function renderEvents() {
+        const container = document.getElementById('eventsContainer');
+        if (!container) {
+          console.error('Events container not found');
+          return;
+        }
+        
+        container.innerHTML = '';
+
+        if (!UPCOMING_EVENTS || UPCOMING_EVENTS.length === 0) {
+          console.error('No events found in UPCOMING_EVENTS');
+          return;
+        }
+
+        UPCOMING_EVENTS.forEach(event => {
+          const categoryLabel = event.category.charAt(0).toUpperCase() + event.category.slice(1).replace('-', ' ');
+          const eventCard = document.createElement('div');
+          eventCard.className = 'card event-card';
+          eventCard.innerHTML = `
+            <img src="${event.image}" alt="${event.title}" style="
+              height: 200px;
+              width: 100%;
+              object-fit: cover;
+              border-radius: var(--radius-base) var(--radius-base) 0 0;
+              display: block;
+            ">
+            <div class="card-body">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-2);">
+                <span class="event-date" style="color: var(--color-primary); font-weight: var(--font-semibold); font-size: var(--text-sm);">
+                  ${event.date}
+                </span>
+                <span class="event-category" style="background: var(--color-grey-200); padding: 4px 8px; border-radius: var(--radius-sm); font-size: var(--text-xs);">
+                  ${categoryLabel}
+                </span>
+              </div>
+              <h4 style="font-weight: var(--font-semibold); margin-bottom: var(--space-2);">${event.title}</h4>
+              <p style="color: var(--color-grey-600); font-size: var(--text-sm); margin-bottom: var(--space-4);">
+                ${event.description}
+              </p>
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div style="font-size: var(--text-sm); color: var(--color-grey-600);">
+                  <div style="margin-bottom: var(--space-2);"><i class="fas fa-map-marker-alt" style="color: var(--color-primary); margin-right: var(--space-2);"></i>${event.location}</div>
+                  <div><i class="fas fa-clock" style="color: var(--color-primary); margin-right: var(--space-2);"></i>${event.time}</div>
+                </div>
+                <a href="#" class="btn btn-primary btn-sm">${event.buttonText}</a>
+              </div>
+            </div>
+          `;
+          container.appendChild(eventCard);
+        });
+
+        totalPages = Math.ceil(UPCOMING_EVENTS.length / eventsPerPage);
+        generatePageButtons();
+      }
+
+      function generatePageButtons() {
+        const paginationContainer = document.getElementById('paginationContainer');
+        if (!paginationContainer) return;
+
+        // Clear existing page buttons (keep Previous and Next buttons)
+        const existingPageBtns = paginationContainer.querySelectorAll('.page-btn');
+        existingPageBtns.forEach(btn => btn.remove());
+
+        // Insert page buttons between Previous and Next buttons
+        const nextBtn = document.getElementById('nextBtn');
+        for (let i = 1; i <= totalPages; i++) {
+          const pageBtn = document.createElement('button');
+          pageBtn.className = 'page-btn';
+          pageBtn.setAttribute('data-page', i);
+          pageBtn.textContent = i;
+          pageBtn.style.cssText = `
+            padding: var(--space-3) var(--space-4);
+            border: 2px solid var(--color-grey-300);
+            border-radius: var(--radius-base);
+            background: var(--color-white);
+            cursor: pointer;
+            transition: all var(--transition-base);
+            font-weight: var(--font-semibold);
+          `;
+          pageBtn.addEventListener('click', function() {
+            showPage(i);
+          });
+          paginationContainer.insertBefore(pageBtn, nextBtn);
+        }
+
+        updatePaginationButtons();
+      }
+
+      function showPage(pageNum) {
+        const allCards = document.querySelectorAll('.event-card');
+        if (allCards.length === 0) {
+          console.error('No event cards found');
+          return;
+        }
+
+        const startIdx = (pageNum - 1) * eventsPerPage;
+        const endIdx = startIdx + eventsPerPage;
+
+        allCards.forEach((card, idx) => {
+          card.style.display = (idx >= startIdx && idx < endIdx) ? 'block' : 'none';
+        });
+
+        currentPage = pageNum;
+        updatePaginationButtons();
+      }
+
+      function updatePaginationButtons() {
+        const pageButtons = document.querySelectorAll('.page-btn');
+        pageButtons.forEach(btn => {
+          const btnPage = parseInt(btn.getAttribute('data-page'));
+          if (btnPage === currentPage) {
+            btn.style.background = 'var(--color-primary)';
+            btn.style.color = 'var(--color-white)';
+            btn.style.borderColor = 'var(--color-primary)';
+          } else {
+            btn.style.background = 'var(--color-white)';
+            btn.style.color = 'var(--color-black)';
+            btn.style.borderColor = 'var(--color-grey-300)';
+          }
+        });
+
+        // Update Previous button state
+        const prevBtn = document.getElementById('prevBtn');
+        if (prevBtn) {
+          prevBtn.style.opacity = currentPage === 1 ? '0.5' : '1';
+          prevBtn.style.pointerEvents = currentPage === 1 ? 'none' : 'auto';
+        }
+
+        // Update Next button state
+        const nextBtn = document.getElementById('nextBtn');
+        if (nextBtn) {
+          nextBtn.style.opacity = currentPage === totalPages ? '0.5' : '1';
+          nextBtn.style.pointerEvents = currentPage === totalPages ? 'none' : 'auto';
+        }
+      }
+
+      // Previous button
+      const prevBtn = document.getElementById('prevBtn');
+      if (prevBtn) {
+        prevBtn.addEventListener('click', function() {
+          if (currentPage > 1) {
+            showPage(currentPage - 1);
+          }
+        });
+      }
+
+      // Next button
+      const nextBtn = document.getElementById('nextBtn');
+      if (nextBtn) {
+        nextBtn.addEventListener('click', function() {
+          if (currentPage < totalPages) {
+            showPage(currentPage + 1);
+          }
+        });
+      }
+
+      // Initialize
+      renderEvents();
+      showPage(1);
+    });
+  </script>
+</body>
+</html>

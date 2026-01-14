@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Blog Article - Yi Pune Chapter">
+  <meta name="keywords" content="Yi Pune blog, articles, insights">
+  <title>Blog Article - Yi Pune Chapter</title>
+  <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <!-- Data File -->
+  <script src="../js/data.js"></script>
+</head>
+<body>
+  <!-- Navigation -->
+  <div id="navbar-container"></div>
+
+  <main class="page-content">
+    <!-- Page Header -->
+    <section class="hero" style="min-height: 300px;">
+      <div class="hero-content scroll-animate">
+        <h1 class="hero-title" id="blogTitle">Blog Article</h1>
+        <p class="hero-subtitle" id="blogExcerpt">Loading article...</p>
+      </div>
+    </section>
+
+    <!-- Blog Content Section -->
+    <section class="section">
+      <div class="container" style="max-width: 800px;">
+        <article>
+          <!-- Blog Meta -->
+          <div style="display: flex; gap: var(--space-4); margin-bottom: var(--space-8); flex-wrap: wrap; align-items: center;">
+            <span id="blogCategory" style="
+              background: var(--color-primary);
+              color: var(--color-white);
+              padding: var(--space-2) var(--space-4);
+              border-radius: var(--radius-full);
+              font-size: var(--text-sm);
+              font-weight: var(--font-semibold);
+            ">Category</span>
+            <span id="blogDate" style="color: var(--color-grey-600); font-size: var(--text-sm);">Date</span>
+            <span id="blogReadTime" style="color: var(--color-grey-600); font-size: var(--text-sm);">Read Time</span>
+          </div>
+
+          <!-- Featured Image -->
+          <img id="blogImage" src="" alt="Blog Article" style="
+            height: 400px;
+            width: 100%;
+            object-fit: cover;
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--space-8);
+            display: block;
+          ">
+
+          <!-- Full Content -->
+          <div id="blogContent" style="
+            font-size: var(--text-lg);
+            line-height: var(--leading-relaxed);
+            color: var(--color-grey-700);
+            margin-bottom: var(--space-12);
+          ">
+            Loading content...
+          </div>
+
+          <!-- Author Info -->
+          <div style="
+            background: var(--color-white);
+            padding: var(--space-8);
+            border-radius: var(--radius-lg);
+            margin-top: var(--space-12);
+            border: 1px solid var(--color-grey-200);
+            color: var(--color-black);
+          ">
+            <div style="display: flex; gap: var(--space-6); align-items: flex-start;">
+              <div style="
+                width: 100px;
+                height: 100px;
+                background: var(--color-grey-100);
+                border-radius: var(--radius-full);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 48px;
+                flex-shrink: 0;
+                box-shadow: var(--shadow-md);
+              ">👤</div>
+              <div>
+                <h3 id="authorName" style="font-size: var(--text-xl); font-weight: var(--font-bold); margin-bottom: var(--space-1); color: var(--color-black);">
+                  Author Name
+                </h3>
+                <p id="authorRole" style="color: var(--color-primary); font-size: var(--text-base); font-weight: var(--font-semibold); margin-bottom: var(--space-2);">
+                  Author Role
+                </p>
+                <p style="color: var(--color-grey-600); font-size: var(--text-sm); line-height: var(--leading-relaxed);">
+                  Passionate about sharing insights and driving change through thought leadership and community engagement.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Back to Blogs Link -->
+          <div style="margin-top: var(--space-8);">
+            <a href="blogs.html" style="
+              color: var(--color-primary);
+              font-weight: var(--font-semibold);
+              text-decoration: none;
+              display: inline-flex;
+              align-items: center;
+              gap: var(--space-2);
+            ">
+              <i class="fas fa-arrow-left"></i> Back to Blogs
+            </a>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <div id="footer-container"></div>
+
+  <script src="../js/main.js"></script>
+  <script>
+    // Get blog ID from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const blogId = parseInt(urlParams.get('id'));
+
+    // Find the blog article
+    let blog = null;
+    
+    // Check if it's the featured blog
+    if (blogId === FEATURED_BLOG.id) {
+      blog = FEATURED_BLOG;
+    } else {
+      // Find in blog articles
+      blog = BLOG_ARTICLES.find(b => b.id === blogId);
+    }
+
+    // If blog not found, show error
+    if (!blog) {
+      document.getElementById('blogTitle').textContent = 'Blog Not Found';
+      document.getElementById('blogExcerpt').textContent = 'The blog article you are looking for does not exist.';
+      document.getElementById('blogContent').innerHTML = `
+        <p style="text-align: center; color: var(--color-grey-600);">
+          This blog article could not be found. <a href="blogs.html" style="color: var(--color-primary);">Return to blogs</a>
+        </p>
+      `;
+    } else {
+      // Populate blog details
+      document.getElementById('blogTitle').textContent = blog.title;
+      document.getElementById('blogExcerpt').textContent = blog.excerpt;
+      document.getElementById('blogCategory').textContent = blog.category;
+      document.getElementById('blogDate').textContent = blog.date;
+      document.getElementById('blogReadTime').textContent = blog.readTime || '';
+      document.getElementById('authorName').textContent = blog.author;
+      document.getElementById('authorRole').textContent = blog.authorRole;
+      document.getElementById('blogImage').src = blog.image;
+      document.getElementById('blogImage').alt = blog.title;
+      
+      // Display content from data or generate placeholder
+      if (blog.content) {
+        // Use content from data.js if available
+        document.getElementById('blogContent').innerHTML = `
+          <h2 style="font-size: var(--text-2xl); font-weight: var(--font-bold); margin-bottom: var(--space-6); color: var(--color-black);">
+            ${blog.title}
+          </h2>
+          ${blog.content}
+        `;
+      } else {
+        // Fallback placeholder content
+        document.getElementById('blogContent').innerHTML = `
+          <h2 style="font-size: var(--text-2xl); font-weight: var(--font-bold); margin-bottom: var(--space-6); color: var(--color-black);">
+            ${blog.title}
+          </h2>
+          <p style="margin-bottom: var(--space-6);">${blog.excerpt}</p>
+          <p style="color: var(--color-grey-600); font-style: italic;">Full article content coming soon...</p>
+        `;
+      }
+      
+      // Update page title
+      document.title = blog.title + ' - Yi Pune Chapter';
+    }
+  </script>
+</body>
+</html>

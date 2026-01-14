@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Blog & Insights - Yi Pune Chapter. Read articles on leadership, entrepreneurship, innovation, and social impact.">
+  <meta name="keywords" content="Yi Pune blog, articles, insights, leadership, entrepreneurship, innovation">
+  <title>Blog & Insights - Yi Pune Chapter</title>
+  <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <!-- Data File -->
+  <script src="../js/data.js"></script>
+  <style>
+    /* Featured Blog Responsive Design */
+    @media (max-width: 768px) {
+      .featured-blog {
+        display: grid !important;
+      }
+
+      .featured-blog > div {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+      }
+
+      .featured-blog > div > div:first-child {
+        height: 250px !important;
+        order: 1 !important;
+      }
+
+      .featured-blog > div > div:last-child {
+        order: 2 !important;
+        padding: var(--space-8) !important;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .featured-blog > div > div:first-child {
+        height: 200px !important;
+      }
+
+      .featured-blog > div > div:last-child {
+        padding: var(--space-6) !important;
+      }
+
+      .featured-blog h3 {
+        font-size: var(--text-2xl) !important;
+      }
+
+      .featured-blog p {
+        font-size: var(--text-base) !important;
+      }
+
+      .featured-blog > div > div:last-child > div:last-child {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: var(--space-4) !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation - Loaded from components/navbar.html -->
+  <div id="navbar-container"></div>
+
+  <main class="page-content">
+    <!-- Page Header -->
+    <section class="hero" style="min-height: 400px;">
+      <div class="hero-content scroll-animate">
+        <h1 class="hero-title">Blog & Insights</h1>
+        <p class="hero-subtitle">
+          Thought-provoking articles, stories, and insights from our community on leadership, innovation, entrepreneurship, and nation-building.
+        </p>
+      </div>
+    </section>
+
+    <!-- Featured Blog Section -->
+    <section class="section">
+      <div class="container">
+        <div class="section-heading scroll-animate">
+          <h2 class="section-title">Featured Article</h2>
+        </div>
+
+        <div id="featuredBlogContainer" class="featured-blog scroll-animate">
+          <!-- Featured blog will be generated here by JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Blog Grid Section -->
+    <section class="section bg-grey">
+      <div class="container">
+        <div class="section-heading scroll-animate">
+          <h2 class="section-title">Latest Articles</h2>
+          <p class="section-subtitle">
+            Stay updated with insights and stories from our community
+          </p>
+        </div>
+
+        <!-- Search and Filter -->
+        <div style="margin-bottom: var(--space-12);">
+          <div style="display: flex; gap: var(--space-4); flex-wrap: wrap; justify-content: center;">
+            <input type="text" placeholder="Search articles..." class="search-input" style="
+              padding: var(--space-3) var(--space-6);
+              border: 2px solid var(--color-grey-300);
+              border-radius: var(--radius-base);
+              font-size: var(--text-base);
+              flex: 1;
+              max-width: 300px;
+            ">
+            <select class="category-filter" style="
+              padding: var(--space-3) var(--space-6);
+              border: 2px solid var(--color-grey-300);
+              border-radius: var(--radius-base);
+              font-size: var(--text-base);
+              background: var(--color-white);
+              cursor: pointer;
+            ">
+              <option value="">All Categories</option>
+              <option value="leadership">Leadership</option>
+              <option value="entrepreneurship">Entrepreneurship</option>
+              <option value="innovation">Innovation</option>
+              <option value="sustainability">Sustainability</option>
+              <option value="social-impact">Social Impact</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Blog Cards Grid -->
+        <div class="grid grid-cols-3 scroll-animate" id="blogsContainer" style="gap: var(--space-8);">
+          <!-- Blog cards will be generated here by JavaScript -->
+        </div>
+
+        <!-- Pagination -->
+        <div id="blogPaginationContainer" style="display: flex; justify-content: center; gap: var(--space-2); margin-top: var(--space-12);">
+          <!-- Pagination buttons will be generated here by JavaScript -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <div id="footer-container"></div>
+
+  <script src="../js/main.js"></script>
+  <script>
+    // Wait for DOM to be fully loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      // Category colors mapping
+      const categoryColors = {
+        'Leadership': { bg: '#E3F2FD', text: '#1976D2' },
+        'Sustainability': { bg: '#E8F5E9', text: '#2E7D32' },
+        'Innovation': { bg: '#F3E5F5', text: '#6A1B9A' },
+        'Entrepreneurship': { bg: '#FEF3C7', text: '#B45309' },
+        'Social Impact': { bg: '#FEE2E2', text: '#B91C1C' }
+      };
+
+      // Render Featured Blog
+      function renderFeaturedBlog() {
+        const container = document.getElementById('featuredBlogContainer');
+        if (!container || !FEATURED_BLOG) {
+          console.error('Featured blog container or data not found');
+          return;
+        }
+
+        const colors = categoryColors[FEATURED_BLOG.category] || { bg: '#E3F2FD', text: '#1976D2' };
+        const html = `
+          <div style="
+            background: var(--color-white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+          ">
+            <img src="${FEATURED_BLOG.image}" alt="${FEATURED_BLOG.title}" style="
+              height: 400px;
+              width: 100%;
+              object-fit: cover;
+              display: block;
+            ">
+            <div style="padding: var(--space-12);">
+              <div style="display: flex; gap: var(--space-2); margin-bottom: var(--space-4);">
+                <span style="
+                  background: var(--color-primary);
+                  color: var(--color-white);
+                  padding: var(--space-1) var(--space-3);
+                  border-radius: var(--radius-full);
+                  font-size: var(--text-xs);
+                  font-weight: var(--font-semibold);
+                ">${FEATURED_BLOG.category}</span>
+                <span style="
+                  background: var(--color-grey-200);
+                  color: var(--color-grey-600);
+                  padding: var(--space-1) var(--space-3);
+                  border-radius: var(--radius-full);
+                  font-size: var(--text-xs);
+                ">${FEATURED_BLOG.date}</span>
+              </div>
+              <h3 style="font-size: var(--text-3xl); font-weight: var(--font-bold); margin-bottom: var(--space-4);">
+                ${FEATURED_BLOG.title}
+              </h3>
+              <p style="color: var(--color-grey-600); font-size: var(--text-lg); line-height: var(--leading-relaxed); margin-bottom: var(--space-6);">
+                ${FEATURED_BLOG.excerpt}
+              </p>
+              <div style="display: flex; align-items: center; justify-content: space-between;">
+                <div style="display: flex; align-items: center; gap: var(--space-3);">
+                  <div style="
+                    width: 50px;
+                    height: 50px;
+                    background: var(--color-grey-300);
+                    border-radius: var(--radius-full);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                  ">👤</div>
+                  <div>
+                    <div style="font-weight: var(--font-semibold); font-size: var(--text-sm);">${FEATURED_BLOG.author}</div>
+                    <div style="font-size: var(--text-xs); color: var(--color-grey-500);">${FEATURED_BLOG.authorRole}</div>
+                  </div>
+                </div>
+                <a href="blog-detail.html?id=${FEATURED_BLOG.id}" class="btn btn-primary">Read More</a>
+              </div>
+            </div>
+          </div>
+        `;
+        container.innerHTML = html;
+      }
+
+      // Pagination settings
+      const blogsPerPage = 6;
+      let currentBlogPage = 1;
+      let filteredBlogs = [...BLOG_ARTICLES];
+
+      // Render Blog Articles
+      function renderBlogs() {
+        const container = document.getElementById('blogsContainer');
+        if (!container || !filteredBlogs || filteredBlogs.length === 0) {
+          container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--color-grey-600);">No blogs found.</p>';
+          document.getElementById('blogPaginationContainer').innerHTML = '';
+          return;
+        }
+
+        container.innerHTML = '';
+
+        filteredBlogs.forEach((blog, index) => {
+          const colors = categoryColors[blog.category] || { bg: '#E3F2FD', text: '#1976D2' };
+          const blogCard = document.createElement('div');
+          blogCard.className = 'card blog-card';
+          blogCard.setAttribute('data-blog-index', index);
+          blogCard.innerHTML = `
+            <img src="${blog.image}" alt="${blog.title}" style="
+              height: 250px;
+              width: 100%;
+              object-fit: cover;
+              border-radius: var(--radius-base) var(--radius-base) 0 0;
+              display: block;
+            ">
+            <div class="card-body">
+              <div style="display: flex; gap: var(--space-2); margin-bottom: var(--space-3);">
+                <span class="blog-category" style="
+                  background: ${colors.bg};
+                  color: ${colors.text};
+                  padding: 4px 8px;
+                  border-radius: var(--radius-sm);
+                  font-size: var(--text-xs);
+                  font-weight: var(--font-semibold);
+                ">${blog.category}</span>
+                <span style="
+                  color: var(--color-grey-500);
+                  font-size: var(--text-xs);
+                ">${blog.date}</span>
+              </div>
+              <h4 style="font-size: var(--text-lg); font-weight: var(--font-bold); margin-bottom: var(--space-3);">
+                ${blog.title}
+              </h4>
+              <p style="color: var(--color-grey-600); font-size: var(--text-sm); line-height: var(--leading-relaxed); margin-bottom: var(--space-4);">
+                ${blog.excerpt}
+              </p>
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div style="display: flex; align-items: center; gap: var(--space-2);">
+                  <div style="
+                    width: 32px;
+                    height: 32px;
+                    background: var(--color-grey-300);
+                    border-radius: var(--radius-full);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: var(--text-lg);
+                  ">👤</div>
+                  <div style="font-size: var(--text-xs);">
+                    <div style="font-weight: var(--font-semibold);">${blog.author}</div>
+                    <div style="color: var(--color-grey-500);">${blog.readTime}</div>
+                  </div>
+                </div>
+                <a href="blog-detail.html?id=${blog.id}" style="color: var(--color-primary); text-decoration: none; font-weight: var(--font-semibold);">
+                  <i class="fas fa-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          `;
+          container.appendChild(blogCard);
+        });
+
+        // Setup pagination
+        setupBlogPagination();
+        showBlogPage(1);
+      }
+
+      // Filter and search blogs
+      function filterBlogs() {
+        const searchInput = document.querySelector('.search-input').value.toLowerCase();
+        const categoryFilter = document.querySelector('.category-filter').value.toLowerCase();
+
+        filteredBlogs = BLOG_ARTICLES.filter(blog => {
+          const matchesSearch = blog.title.toLowerCase().includes(searchInput) || 
+                                blog.excerpt.toLowerCase().includes(searchInput);
+          const matchesCategory = !categoryFilter || blog.category.toLowerCase().replace(/\s+/g, '-') === categoryFilter;
+          return matchesSearch && matchesCategory;
+        });
+
+        currentBlogPage = 1;
+        renderBlogs();
+      }
+
+      // Show specific page of blogs
+      function showBlogPage(pageNum) {
+        const blogCards = document.querySelectorAll('.blog-card');
+        const startIndex = (pageNum - 1) * blogsPerPage;
+        const endIndex = startIndex + blogsPerPage;
+
+        blogCards.forEach((card, index) => {
+          if (index >= startIndex && index < endIndex) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+
+        updateBlogPaginationButtons(pageNum);
+        currentBlogPage = pageNum;
+      }
+
+      // Generate pagination buttons
+      function setupBlogPagination() {
+        const totalBlogs = filteredBlogs.length;
+        const totalPages = Math.ceil(totalBlogs / blogsPerPage);
+        const paginationContainer = document.getElementById('blogPaginationContainer');
+
+        if (!paginationContainer) return;
+
+        paginationContainer.innerHTML = '';
+
+        if (totalPages <= 1) return;
+
+        // Previous button
+        const prevBtn = document.createElement('button');
+        prevBtn.textContent = '← Previous';
+        prevBtn.id = 'blogPrevBtn';
+        prevBtn.style.cssText = `
+          padding: var(--space-3) var(--space-4);
+          border: 2px solid var(--color-grey-300);
+          border-radius: var(--radius-base);
+          background: var(--color-white);
+          cursor: pointer;
+          transition: all var(--transition-base);
+        `;
+        prevBtn.addEventListener('click', () => {
+          if (currentBlogPage > 1) {
+            showBlogPage(currentBlogPage - 1);
+          }
+        });
+        paginationContainer.appendChild(prevBtn);
+
+        // Page number buttons
+        for (let i = 1; i <= totalPages; i++) {
+          const pageBtn = document.createElement('button');
+          pageBtn.textContent = i;
+          pageBtn.className = 'blog-page-btn';
+          pageBtn.setAttribute('data-page', i);
+          pageBtn.style.cssText = `
+            padding: var(--space-3) var(--space-4);
+            border: 2px solid var(--color-grey-300);
+            border-radius: var(--radius-base);
+            background: var(--color-white);
+            cursor: pointer;
+            transition: all var(--transition-base);
+          `;
+          pageBtn.addEventListener('click', () => showBlogPage(i));
+          paginationContainer.appendChild(pageBtn);
+        }
+
+        // Next button
+        const nextBtn = document.createElement('button');
+        nextBtn.textContent = 'Next →';
+        nextBtn.id = 'blogNextBtn';
+        nextBtn.style.cssText = `
+          padding: var(--space-3) var(--space-4);
+          border: 2px solid var(--color-grey-300);
+          border-radius: var(--radius-base);
+          background: var(--color-white);
+          cursor: pointer;
+          transition: all var(--transition-base);
+        `;
+        nextBtn.addEventListener('click', () => {
+          if (currentBlogPage < totalPages) {
+            showBlogPage(currentBlogPage + 1);
+          }
+        });
+        paginationContainer.appendChild(nextBtn);
+      }
+
+      // Update pagination button states
+      function updateBlogPaginationButtons(currentPage) {
+        const totalBlogs = filteredBlogs.length;
+        const totalPages = Math.ceil(totalBlogs / blogsPerPage);
+
+        // Update Previous button
+        const prevBtn = document.getElementById('blogPrevBtn');
+        if (prevBtn) {
+          prevBtn.style.opacity = currentPage === 1 ? '0.5' : '1';
+          prevBtn.style.pointerEvents = currentPage === 1 ? 'none' : 'auto';
+        }
+
+        // Update page buttons
+        document.querySelectorAll('.blog-page-btn').forEach(btn => {
+          const pageNum = parseInt(btn.getAttribute('data-page'));
+          if (pageNum === currentPage) {
+            btn.style.background = 'var(--color-primary)';
+            btn.style.color = 'var(--color-white)';
+            btn.style.borderColor = 'var(--color-primary)';
+          } else {
+            btn.style.background = 'var(--color-white)';
+            btn.style.color = 'var(--color-black)';
+            btn.style.borderColor = 'var(--color-grey-300)';
+          }
+        });
+
+        // Update Next button
+        const nextBtn = document.getElementById('blogNextBtn');
+        if (nextBtn) {
+          nextBtn.style.opacity = currentPage === totalPages ? '0.5' : '1';
+          nextBtn.style.pointerEvents = currentPage === totalPages ? 'none' : 'auto';
+        }
+      }
+
+      // Setup search and filter event listeners
+      document.querySelector('.search-input').addEventListener('input', filterBlogs);
+      document.querySelector('.category-filter').addEventListener('change', filterBlogs);
+
+      // Initialize
+      renderFeaturedBlog();
+      renderBlogs();
+    });
+  </script>
+</html>
