@@ -14,9 +14,80 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- Swiper CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <link rel="stylesheet" href="../css/main.css">
+  <style>
+    .vertical-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+
+    .vertical-tab {
+      border: 1px solid #d5d7da;
+      background: #fff;
+      color: #111827;
+      border-radius: 999px;
+      padding: 0.55rem 1rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .vertical-tab.is-active {
+      background: #111827;
+      color: #fff;
+      border-color: #111827;
+    }
+
+    .vertical-panel {
+      display: none;
+    }
+
+    .vertical-panel.is-active {
+      display: block;
+    }
+
+    .leadership-spotlight {
+      gap: 1.25rem;
+      margin-bottom: 2.25rem;
+    }
+
+    .leadership-spotlight .leader-image-container {
+      margin-bottom: 0.75rem;
+    }
+
+    .leadership-spotlight .leader-card.spotlight {
+      height: auto;
+      min-height: 290px;
+    }
+
+    .vertical-panel .leadership-grid {
+      margin-top: 1.25rem;
+      gap: 1.25rem;
+    }
+
+    /* Override fixed global card height for cleaner tab layout spacing */
+    .vertical-panel .leader-card {
+      height: auto;
+      min-height: 290px;
+      padding: 1.25rem 1rem;
+    }
+
+    .vertical-panel .leader-image-container {
+      margin-bottom: 1rem;
+    }
+
+    .vertical-panel .leader-name {
+      margin-bottom: 0.5rem;
+    }
+
+    .vertical-panel .leader-title {
+      margin-bottom: 0;
+    }
+  </style>
 </head>
 <body>
   <!-- Navigation - Loaded from components/navbar.html -->
@@ -49,299 +120,142 @@
           <div class="leader-card spotlight">
             <div class="leader-image-container">
               <div class="leader-image placeholder">
-                <span class="leader-initials">CC</span>
+                <span class="leader-initials">YD</span>
               </div>
             </div>
             <div class="leader-info">
-              <h3 class="leader-name">Chapter Chair Name</h3>
-              <p class="leader-title">Chapter Chair (2024-25)</p>
-              <p class="leader-company">Company Name | Designation</p>
-              <p class="leader-bio">
-                Leading Yi Pune with a vision to empower young professionals and entrepreneurs to create meaningful social impact. With extensive experience in [industry/field], bringing strategic insights to drive the chapter's growth and initiatives.
-              </p>
-              <div class="leader-contact">
-                <a href="mailto:chair@yipune.org" class="contact-link">
-                  <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636C.732 21.002 0 20.27 0 19.366V5.457c0-.887.711-1.636 1.636-1.636h.818L12 10.545l9.546-6.724h.818C23.268 3.821 24 4.57 24 5.457z"/>
-                  </svg>
-                  Contact Chair
-                </a>
-                <a href="https://linkedin.com" target="_blank" class="contact-link">
-                  <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                  </svg>
-                  LinkedIn
-                </a>
+              <h3 class="leader-name">Yogesh Desai</h3>
+              <p class="leader-title">Chapter Chair</p>
+            </div>
+          </div>
+          <div class="leader-card spotlight">
+            <div class="leader-image-container">
+              <div class="leader-image placeholder">
+                <span class="leader-initials">RB</span>
               </div>
+            </div>
+            <div class="leader-info">
+              <h3 class="leader-name">Raghavendra Bhat</h3>
+              <p class="leader-title">Chapter Co-Chair</p>
             </div>
           </div>
         </div>
 
         <!-- Core Team / Vertical Heads -->
         <section class="section bg-grey">
-      <div class="container">
-        <div class="section-heading">
-          <h2 class="section-title">Core Team & Vertical Heads</h2>
-          <p class="section-subtitle">
-            Dedicated leaders driving excellence across all Yi Pune verticals and initiatives
-          </p>
-        </div>
-
-        <div class="leadership-grid">
-          <div class="leader-card">
-            <div class="leader-image-container">
-              <div class="leader-image placeholder">
-                <span class="leader-initials">RI</span>
-              </div>
-            </div>
-            <div class="leader-info">
-              <h3 class="leader-name">Rural Initiatives Head</h3>
-              <p class="leader-title">Vertical Head - Rural Initiatives</p>
-              <p class="leader-company">Company Name | Designation</p>
-              <p class="leader-bio">
-                Leading efforts in rural development, youth empowerment, and sustainable community initiatives across Maharashtra.
+          <div class="container">
+            <div class="section-heading">
+              <h2 class="section-title">Core Team & Vertical Heads</h2>
+              <p class="section-subtitle">
+                Dedicated leaders driving excellence across all Yi Pune verticals and initiatives
               </p>
             </div>
-          </div>
 
-          <div class="leader-card">
-            <div class="leader-image-container">
-              <div class="leader-image placeholder">
-                <span class="leader-initials">HE</span>
+            <div class="vertical-tabs" role="tablist" aria-label="Leadership Verticals">
+              <button class="vertical-tab is-active" role="tab" aria-selected="true" data-tab="learning">Learning</button>
+              <button class="vertical-tab" role="tab" aria-selected="false" data-tab="branding">Branding</button>
+              <button class="vertical-tab" role="tab" aria-selected="false" data-tab="climate">Climate Change</button>
+              <button class="vertical-tab" role="tab" aria-selected="false" data-tab="road-safety">Road Safety</button>
+              <button class="vertical-tab" role="tab" aria-selected="false" data-tab="innovation">Innovation</button>
+              <button class="vertical-tab" role="tab" aria-selected="false" data-tab="sports-health">Sports &amp; Health</button>
+              <button class="vertical-tab" role="tab" aria-selected="false" data-tab="accessibility">Accessibility</button>
+              <button class="vertical-tab" role="tab" aria-selected="false" data-tab="entrepreneurship">Entrepreneurship</button>
+              <button class="vertical-tab" role="tab" aria-selected="false" data-tab="membership">Membership</button>
+              <button class="vertical-tab" role="tab" aria-selected="false" data-tab="rural">Rural</button>
+              <button class="vertical-tab" role="tab" aria-selected="false" data-tab="yuva">YUVA</button>
+              <button class="vertical-tab" role="tab" aria-selected="false" data-tab="thalir">Thalir</button>
+            </div>
+
+            <div id="panel-learning" class="vertical-panel is-active" role="tabpanel">
+              <div class="leadership-grid">
+                <div class="leader-card"><div class="leader-image-container"><div class="leader-image placeholder"><span class="leader-initials">SK</span></div></div><div class="leader-info"><h3 class="leader-name">Sagar Khandelwal</h3><p class="leader-title">Learning Chair</p></div></div>
+                <div class="leader-card"><div class="leader-image-container"><div class="leader-image placeholder"><span class="leader-initials">VV</span></div></div><div class="leader-info"><h3 class="leader-name">Viraf Vesuna</h3><p class="leader-title">Learning Co-Chair</p></div></div>
               </div>
             </div>
-            <div class="leader-info">
-              <h3 class="leader-name">Health & Environment Head</h3>
-              <p class="leader-title">Vertical Head - Health & Environment</p>
-              <p class="leader-company">Company Name | Designation</p>
-              <p class="leader-bio">
-                Driving sustainability initiatives, health awareness programs, and environmental conservation projects.
-              </p>
-            </div>
-          </div>
 
-          <div class="leader-card">
-            <div class="leader-image-container">
-              <div class="leader-image placeholder">
-                <span class="leader-initials">IE</span>
+            <div id="panel-branding" class="vertical-panel" role="tabpanel" hidden>
+              <div class="leadership-grid">
+                <div class="leader-card"><div class="leader-image-container"><div class="leader-image placeholder"><span class="leader-initials">AB</span></div></div><div class="leader-info"><h3 class="leader-name">Amol Barve</h3><p class="leader-title">Branding Chair</p></div></div>
+                <div class="leader-card"><div class="leader-image-container"><div class="leader-image placeholder"><span class="leader-initials">MS</span></div></div><div class="leader-info"><h3 class="leader-name">Mahesh Shrimali</h3><p class="leader-title">Branding Co-Chair</p></div></div>
               </div>
             </div>
-            <div class="leader-info">
-              <h3 class="leader-name">Innovation Head</h3>
-              <p class="leader-title">Vertical Head - Innovation & Entrepreneurship</p>
-              <p class="leader-company">Company Name | Designation</p>
-              <p class="leader-bio">
-                Fostering startup ecosystem, promoting innovation, and supporting entrepreneur development programs.
-              </p>
-            </div>
-          </div>
 
-          <div class="leader-card">
-            <div class="leader-image-container">
-              <div class="leader-image placeholder">
-                <span class="leader-initials">LD</span>
+            <div id="panel-climate" class="vertical-panel" role="tabpanel" hidden>
+              <div class="leadership-grid">
+                <div class="leader-card"><div class="leader-image-container"><div class="leader-image placeholder"><span class="leader-initials">BS</span></div></div><div class="leader-info"><h3 class="leader-name">Bhaavi Sanghvi</h3><p class="leader-title">Climate Change Chair</p></div></div>
+                <div class="leader-card"><div class="leader-image-container"><div class="leader-image placeholder"><span class="leader-initials">SD</span></div></div><div class="leader-info"><h3 class="leader-name">Shubham Deshmukh</h3><p class="leader-title">Climate Change Co-Chair</p></div></div>
+                <div class="leader-card"><div class="leader-image-container"><div class="leader-image placeholder"><span class="leader-initials">VB</span></div></div><div class="leader-info"><h3 class="leader-name">Vijay Bhosale</h3><p class="leader-title">Climate Change Co-Chair</p></div></div>
+                <div class="leader-card"><div class="leader-image-container"><div class="leader-image placeholder"><span class="leader-initials">VS</span></div></div><div class="leader-info"><h3 class="leader-name">Vinayak Satpute</h3><p class="leader-title">Climate Change Co-Chair</p></div></div>
               </div>
             </div>
-            <div class="leader-info">
-              <h3 class="leader-name">Leadership Development Head</h3>
-              <p class="leader-title">Vertical Head - Leadership Development</p>
-              <p class="leader-company">Company Name | Designation</p>
-              <p class="leader-bio">
-                Building leadership capabilities through training, mentorship, and skill development programs.
-              </p>
-            </div>
-          </div>
 
-          <div class="leader-card">
-            <div class="leader-image-container">
-              <div class="leader-image placeholder">
-                <span class="leader-initials">NB</span>
+            <div id="panel-road-safety" class="vertical-panel" role="tabpanel" hidden>
+              <div class="leadership-grid">
+                <div class="leader-card"><div class="leader-image-container"><div class="leader-image placeholder"><span class="leader-initials">PA</span></div></div><div class="leader-info"><h3 class="leader-name">Prashil Agrawal</h3><p class="leader-title">Road Safety Chair</p></div></div>
+                <div class="leader-card"><div class="leader-image-container"><div class="leader-image placeholder"><span class="leader-initials">KA</span></div></div><div class="leader-info"><h3 class="leader-name">Karan Avhad</h3><p class="leader-title">Road Safety Co-Chair</p></div></div>
               </div>
             </div>
-            <div class="leader-info">
-              <h3 class="leader-name">Nation Building Head</h3>
-              <p class="leader-title">Vertical Head - Nation Building</p>
-              <p class="leader-company">Company Name | Designation</p>
-              <p class="leader-bio">
-                Promoting civic engagement, governance initiatives, and nation-building activities.
-              </p>
-            </div>
-          </div>
 
-          <div class="leader-card">
-            <div class="leader-image-container">
-              <div class="leader-image placeholder">
-                <span class="leader-initials">YA</span>
+            <div id="panel-innovation" class="vertical-panel" role="tabpanel" hidden>
+              <div class="leadership-grid">
+                <div class="leader-card"><div class="leader-image-container"><div class="leader-image placeholder"><span class="leader-initials">RT</span></div></div><div class="leader-info"><h3 class="leader-name">Rohan Turior</h3><p class="leader-title">Innovation Chair</p></div></div>
+                <div class="leader-card"><div class="leader-image-container"><div class="leader-image placeholder"><span class="leader-initials">AS</span></div></div><div class="leader-info"><h3 class="leader-name">Ankita Sanghvi</h3><p class="leader-title">Innovation Co-Chair</p></div></div>
+                <div class="leader-card"><div class="leader-image-container"><div class="leader-image placeholder"><span class="leader-initials">AK</span></div></div><div class="leader-info"><h3 class="leader-name">Aditya Kulkarni</h3><p class="leader-title">Innovation Co-Chair</p></div></div>
               </div>
             </div>
-            <div class="leader-info">
-              <h3 class="leader-name">Youth Affairs Head</h3>
-              <p class="leader-title">Vertical Head - Youth Affairs</p>
-              <p class="leader-company">Company Name | Designation</p>
-              <p class="leader-bio">
-                Connecting with college students, promoting skilling initiatives, and driving Yi Yuva programs.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- Secretariat -->
-    <section class="section">
-      <div class="container">
-        <div class="section-heading">
-          <h2 class="section-title">Yi Pune Secretariat</h2>
-          <p class="section-subtitle">
-            Our dedicated support team ensuring smooth operations and member services
-          </p>
-        </div>
-
-        <div class="leadership-grid">
-          <div class="leader-card">
-            <div class="leader-image-container">
-              <div class="leader-image placeholder">
-                <span class="leader-initials">JS</span>
+            <div id="panel-sports-health" class="vertical-panel" role="tabpanel" hidden>
+              <div class="leadership-grid">
+                <div class="leader-card"><div class="leader-image-container"><div class="leader-image placeholder"><span class="leader-initials">RG</span></div></div><div class="leader-info"><h3 class="leader-name">Raunak Gandhi</h3><p class="leader-title">Sports &amp; Health Chair</p></div></div>
+                <div class="leader-card"><div class="leader-image-container"><div class="leader-image placeholder"><span class="leader-initials">VL</span></div></div><div class="leader-info"><h3 class="leader-name">Vipul Lunawat</h3><p class="leader-title">Sports &amp; Health Co-Chair</p></div></div>
               </div>
             </div>
-            <div class="leader-info">
-              <h3 class="leader-name">Joint Secretary Name</h3>
-              <p class="leader-title">Joint Secretary</p>
-              <p class="leader-company">Yi Pune Secretariat</p>
-              <p class="leader-bio">
-                Managing day-to-day operations, member communications, and event coordination.
-              </p>
-              <div class="leader-contact">
-                <a href="mailto:secretary@yipune.org" class="contact-link">
-                  <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636C.732 21.002 0 20.27 0 19.366V5.457c0-.887.711-1.636 1.636-1.636h.818L12 10.545l9.546-6.724h.818C23.268 3.821 24 4.57 24 5.457z"/>
-                  </svg>
-                  Contact Secretary
-                </a>
+
+            <div id="panel-accessibility" class="vertical-panel" role="tabpanel" hidden>
+              <div class="leadership-grid">
+                <div class="leader-card"><div class="leader-image-container"><div class="leader-image placeholder"><span class="leader-initials">MS</span></div></div><div class="leader-info"><h3 class="leader-name">Megha Sharma</h3><p class="leader-title">Accessibility Chair</p></div></div>
+              </div>
+            </div>
+
+            <div id="panel-entrepreneurship" class="vertical-panel" role="tabpanel" hidden>
+              <div class="leadership-grid">
+                <div class="leader-card"><div class="leader-image-container"><div class="leader-image placeholder"><span class="leader-initials">AV</span></div></div><div class="leader-info"><h3 class="leader-name">Adwait Venkitachalam</h3><p class="leader-title">Entrepreneurship Chair</p></div></div>
+                <div class="leader-card"><div class="leader-image-container"><div class="leader-image placeholder"><span class="leader-initials">HR</span></div></div><div class="leader-info"><h3 class="leader-name">Hanish Raheja</h3><p class="leader-title">Entrepreneurship Co-Chair</p></div></div>
+                <div class="leader-card"><div class="leader-image-container"><div class="leader-image placeholder"><span class="leader-initials">RS</span></div></div><div class="leader-info"><h3 class="leader-name">Rashmi Singh</h3><p class="leader-title">Entrepreneurship Co-Chair</p></div></div>
+              </div>
+            </div>
+
+            <div id="panel-membership" class="vertical-panel" role="tabpanel" hidden>
+              <div class="leadership-grid">
+                <div class="leader-card"><div class="leader-image-container"><div class="leader-image placeholder"><span class="leader-initials">HJ</span></div></div><div class="leader-info"><h3 class="leader-name">Harshwardhan Jain</h3><p class="leader-title">Membership Chair</p></div></div>
+                <div class="leader-card"><div class="leader-image-container"><div class="leader-image placeholder"><span class="leader-initials">RG</span></div></div><div class="leader-info"><h3 class="leader-name">Raunak Gandhi</h3><p class="leader-title">Membership Co-Chair</p></div></div>
+                <div class="leader-card"><div class="leader-image-container"><div class="leader-image placeholder"><span class="leader-initials">OD</span></div></div><div class="leader-info"><h3 class="leader-name">Omkar Dumbre</h3><p class="leader-title">Membership Co-Chair</p></div></div>
+                <div class="leader-card"><div class="leader-image-container"><div class="leader-image placeholder"><span class="leader-initials">YO</span></div></div><div class="leader-info"><h3 class="leader-name">Yash Oswal</h3><p class="leader-title">Membership Co-Chair</p></div></div>
+              </div>
+            </div>
+
+            <div id="panel-rural" class="vertical-panel" role="tabpanel" hidden>
+              <div class="leadership-grid">
+                <div class="leader-card"><div class="leader-image-container"><div class="leader-image placeholder"><span class="leader-initials">GS</span></div></div><div class="leader-info"><h3 class="leader-name">Gaurav Sahane</h3><p class="leader-title">Rural Chair</p></div></div>
+                <div class="leader-card"><div class="leader-image-container"><div class="leader-image placeholder"><span class="leader-initials">MS</span></div></div><div class="leader-info"><h3 class="leader-name">Mahesh Shrimali</h3><p class="leader-title">Rural Co-Chair</p></div></div>
+              </div>
+            </div>
+
+            <div id="panel-yuva" class="vertical-panel" role="tabpanel" hidden>
+              <div class="leadership-grid">
+                <div class="leader-card"><div class="leader-image-container"><div class="leader-image placeholder"><span class="leader-initials">SK</span></div></div><div class="leader-info"><h3 class="leader-name">Shahbaz Khan</h3><p class="leader-title">YUVA Chair</p></div></div>
+                <div class="leader-card"><div class="leader-image-container"><div class="leader-image placeholder"><span class="leader-initials">SJ</span></div></div><div class="leader-info"><h3 class="leader-name">Sonal Jagtap</h3><p class="leader-title">YUVA Co-Chair</p></div></div>
+              </div>
+            </div>
+
+            <div id="panel-thalir" class="vertical-panel" role="tabpanel" hidden>
+              <div class="leadership-grid">
+                <div class="leader-card"><div class="leader-image-container"><div class="leader-image placeholder"><span class="leader-initials">SR</span></div></div><div class="leader-info"><h3 class="leader-name">Siddharth Rajgarhia</h3><p class="leader-title">Thalir Chair</p></div></div>
+                <div class="leader-card"><div class="leader-image-container"><div class="leader-image placeholder"><span class="leader-initials">RA</span></div></div><div class="leader-info"><h3 class="leader-name">Rushikesh Awate</h3><p class="leader-title">Thalir Co-Chair</p></div></div>
               </div>
             </div>
           </div>
-
-          <div class="leader-card">
-            <div class="leader-image-container">
-              <div class="leader-image placeholder">
-                <span class="leader-initials">TC</span>
-              </div>
-            </div>
-            <div class="leader-info">
-              <h3 class="leader-name">Treasurer Name</h3>
-              <p class="leader-title">Treasurer</p>
-              <p class="leader-company">Yi Pune Chapter</p>
-              <p class="leader-bio">
-                Managing financial operations, budgeting, and ensuring fiscal responsibility across all initiatives.
-              </p>
-              <div class="leader-contact">
-                <a href="mailto:treasurer@yipune.org" class="contact-link">
-                  <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636C.732 21.002 0 20.27 0 19.366V5.457c0-.887.711-1.636 1.636-1.636h.818L12 10.545l9.546-6.724h.818C23.268 3.821 24 4.57 24 5.457z"/>
-                  </svg>
-                  Contact Treasurer
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Past Leadership -->
-    <section class="section bg-grey">
-      <div class="container">
-        <div class="section-heading">
-          <h2 class="section-title">Past Leadership</h2>
-          <p class="section-subtitle">
-            Honoring the visionary leaders who have shaped Yi Pune's journey and legacy
-          </p>
-        </div>
-
-        <!-- Swiper Carousel -->
-        <div class="swiper past-leadership-carousel">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <div class="leader-card">
-                <div class="leader-image-container">
-                  <div class="leader-image placeholder">
-                    <span class="leader-initials">PL1</span>
-                  </div>
-                </div>
-                <div class="leader-info">
-                  <h3 class="leader-name">Past Leader One</h3>
-                  <p class="leader-title">Chapter Chair (2022-23)</p>
-                  <p class="leader-company">Company Name | Designation</p>
-                  <p class="leader-bio">
-                    Instrumental in establishing Yi Pune's foundation and core initiatives during the formative years.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div class="swiper-slide">
-              <div class="leader-card">
-                <div class="leader-image-container">
-                  <div class="leader-image placeholder">
-                    <span class="leader-initials">PL2</span>
-                  </div>
-                </div>
-                <div class="leader-info">
-                  <h3 class="leader-name">Past Leader Two</h3>
-                  <p class="leader-title">Co-Chair (2022-23)</p>
-                  <p class="leader-company">Company Name | Designation</p>
-                  <p class="leader-bio">
-                    Contributed significantly to Yi Pune's growth and expansion of our verticals and outreach programs.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div class="swiper-slide">
-              <div class="leader-card">
-                <div class="leader-image-container">
-                  <div class="leader-image placeholder">
-                    <span class="leader-initials">PL3</span>
-                  </div>
-                </div>
-                <div class="leader-info">
-                  <h3 class="leader-name">Past Leader Three</h3>
-                  <p class="leader-title">Vertical Head - Social Impact (2021-23)</p>
-                  <p class="leader-company">Company Name | Designation</p>
-                  <p class="leader-bio">
-                    Pioneered our social impact initiatives and community development programs across Maharashtra.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div class="swiper-slide">
-              <div class="leader-card">
-                <div class="leader-image-container">
-                  <div class="leader-image placeholder">
-                    <span class="leader-initials">PL4</span>
-                  </div>
-                </div>
-                <div class="leader-info">
-                  <h3 class="leader-name">Past Leader Four</h3>
-                  <p class="leader-title">Vertical Head - Innovation (2021-22)</p>
-                  <p class="leader-company">Company Name | Designation</p>
-                  <p class="leader-bio">
-                    Led the establishment of our Innovation & Entrepreneurship vertical and startup support ecosystem.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Navigation buttons -->
-          <div class="swiper-button-prev"></div>
-          <div class="swiper-button-next"></div>
-
-          <!-- Pagination dots -->
-          <div class="swiper-pagination"></div>
-        </div>
+        </section>
       </div>
     </section>
   </main>
@@ -350,47 +264,28 @@
   <div id="footer-container"></div>
 
   <!-- JavaScript -->
-  <!-- Swiper JS -->
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script src="../js/main.js"></script>
   <script>
-    // Initialize Swiper for Past Leadership carousel
-    document.addEventListener('DOMContentLoaded', () => {
-      const swiper = new Swiper('.past-leadership-carousel', {
-        slidesPerView: 4,
-        spaceBetween: 24,
-        slidesPerGroup: 1,
-        loop: true,
-        autoplay: {
-          delay: 4000,
-          disableOnInteraction: false,
-        },
-        navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
-        },
-        pagination: {
-          el: '.swiper-pagination',
-          clickable: true,
-        },
-        breakpoints: {
-          320: {
-            slidesPerView: 1,
-            spaceBetween: 16,
-          },
-          768: {
-            slidesPerView: 2,
-            spaceBetween: 20,
-          },
-          1024: {
-            slidesPerView: 3,
-            spaceBetween: 24,
-          },
-          1440: {
-            slidesPerView: 4,
-            spaceBetween: 24,
-          }
-        }
+    document.addEventListener("DOMContentLoaded", function () {
+      const tabs = document.querySelectorAll(".vertical-tab");
+      const panels = document.querySelectorAll(".vertical-panel");
+
+      tabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          const activeTab = tab.getAttribute("data-tab");
+
+          tabs.forEach((item) => {
+            const isActive = item === tab;
+            item.classList.toggle("is-active", isActive);
+            item.setAttribute("aria-selected", isActive ? "true" : "false");
+          });
+
+          panels.forEach((panel) => {
+            const isActive = panel.id === `panel-${activeTab}`;
+            panel.classList.toggle("is-active", isActive);
+            panel.hidden = !isActive;
+          });
+        });
       });
     });
   </script>

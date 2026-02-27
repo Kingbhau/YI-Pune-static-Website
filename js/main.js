@@ -24,11 +24,14 @@ const NAVBAR_HTML = `<nav class="navbar">
           <li class="navbar-dropdown-item">
             <a href="/pages/who-we-are.html" class="navbar-dropdown-link">Who We Are</a>
           </li>
-          <li class="navbar-dropdown-item">
+          <li class="navbar-dropdown-item" style="display: none;">
             <a href="/pages/our-journey.html" class="navbar-dropdown-link">Our Journey</a>
           </li>
           <li class="navbar-dropdown-item">
             <a href="/pages/leadership.html" class="navbar-dropdown-link">Our Leadership</a>
+          </li>
+          <li class="navbar-dropdown-item">
+            <a href="/pages/past-leadership.html" class="navbar-dropdown-link">Past Leadership</a>
           </li>
         </ul>
       </li>
